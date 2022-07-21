@@ -12,7 +12,7 @@ const Order = () => {
     useEffect( ()=>{       
         
         const getOrders = async() =>{
-            const email = user.email;
+            const email = user?.email;
             const url = `https://enigmatic-fortress-14313.herokuapp.com/orders?email=${email}`;
             try{
                const {data} = await axios.get(url, {
@@ -36,8 +36,13 @@ const Order = () => {
     }, [user]);
 
     return (
-        <div>
+        <div className='w-50 mx-auto'>
             <h2>Yours Orders</h2>
+            {
+                orders.map(order => <div key={order._id}>
+                    <p>{order.email} : {order.service}</p>
+                </div>)
+            }
         </div>
     );
 };
